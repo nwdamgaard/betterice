@@ -8,7 +8,11 @@ minetest.register_node(":default:ice", {
         slippery = 3
     },
 
-    after_dig_node = function(pos, oldnode, oldmetadata, digger)
+    drop = {},
+
+    on_dig = function(pos, node, player)
+        minetest.node_dig(pos, node, player)
+
         local node_underneath = minetest.get_node({x=pos.x, y=pos.y - 1, z=pos.z})
         if node_underneath.name == "air" or node_underneath.name == "ignore" then
             return
